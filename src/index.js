@@ -4,6 +4,7 @@ import _ from 'lodash';
 import './style.css';
 import Icon from './pixi_icon.png';
 import Data from './data.xml';
+import printMe from './print.js';
 
 function component() {
   var element = document.createElement('div');
@@ -18,7 +19,13 @@ function component() {
 
   element.appendChild(myIcon);
 
-  console.log(Data);
+  var btn = document.createElement('button');
+  btn.innerHTML = 'Click me and check the console';
+  btn.addEventListener('click', function() {
+    printMe(Data);
+  });
+
+  element.appendChild(btn);
 
   return element;
 }

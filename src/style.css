@@ -1,4 +1,19 @@
+@font-face {
+    font-family: 'MyFont';
+    src: url('./LovelyHome.ttf');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MyFont2';
+    src: url('./TheWestGate.ttf');
+    font-weight: 600;
+    font-style: normal;
+}
+
 .hello {
   color: red;
+  font-family: 'MyFont2';
   background: url('./pixi_icon.png');
 }

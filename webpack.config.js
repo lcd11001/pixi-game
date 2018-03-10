@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const Webpack = require('webpack');
 
 module.exports = {
   entry: {
@@ -13,7 +14,8 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
 
-  devtool: 'inline-source-map',
+  // unrem this line for debug
+  // devtool: 'inline-source-map',
   devServer: {
     contentBase: './dist'
   },
@@ -26,6 +28,12 @@ module.exports = {
       'dist'
     ])
   ],
+
+  optimization: {
+    splitChunks: {
+      name: 'common'
+    }
+  },
 
   // mode: 'development'
   mode: 'production',

@@ -16,6 +16,8 @@ function component() {
   // Add the image to our existing div
   var myIcon = new Image();
   myIcon.src = Icon;
+  myIcon.style.width = '50%';
+  myIcon.style.height = 'auto';
 
   element.appendChild(myIcon);
 

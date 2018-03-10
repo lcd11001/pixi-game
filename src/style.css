@@ -13,9 +13,11 @@
 }
 
 .hello {
-  color: red;
+  color: white;
   font-family: 'MyFont2';
-  background: url('./pixi_icon.png');
+  background: url('./bg.jpg');
   background-repeat: no-repeat;
-  background-size: 400px 300px;
+  background-size: cover;
+  width: 800px;
+  height: 600px;
 }

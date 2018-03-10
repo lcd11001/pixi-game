@@ -16,4 +16,6 @@
   color: red;
   font-family: 'MyFont2';
   background: url('./pixi_icon.png');
+  background-repeat: no-repeat;
+  background-size: 400px 300px;
 }

@@ -5,6 +5,7 @@ import './style.css';
 import Icon from './pixi_icon.png';
 import Data from './data.xml';
 import printMe from './print.js';
+import printPixiVersion from './pixi_game.js';
 
 function component() {
   var element = document.createElement('div');
@@ -25,6 +26,8 @@ function component() {
   btn.innerHTML = 'Click me and check the console';
   btn.addEventListener('click', function() {
     printMe(Data);
+
+    printPixiVersion();
   });
 
   element.appendChild(btn);

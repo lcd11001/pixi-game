@@ -6,7 +6,8 @@ const Webpack = require('webpack');
 module.exports = {
   entry: {
     app: './src/index.js',
-    print: './src/print.js'
+    print: './src/print.js',
+    game: './src/pixi_game.js'
   },
 
   output: {

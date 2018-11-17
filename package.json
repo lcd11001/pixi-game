@@ -1,31 +1,40 @@
 {
-  "name": "Test",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "watch": "webpack --watch",
-    "start": "webpack-dev-server --open"
+  "name": "pixi-game",
+  "version": "0.1.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lcd11001/pixi-game.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "pixi",
+    "reactjs"
+  ],
+  "author": "Luong Cong Dan",
   "license": "ISC",
-  "devDependencies": {
-    "clean-webpack-plugin": "^0.1.19",
-    "css-loader": "^0.28.10",
-    "csv-loader": "^2.1.1",
-    "file-loader": "^1.1.11",
-    "html-webpack-plugin": "^3.0.6",
-    "style-loader": "^0.20.2",
-    "webpack": "^4.1.0",
-    "webpack-cli": "^2.0.10",
-    "webpack-dev-server": "^3.1.1",
-    "xml-loader": "^1.2.1"
+  "bugs": {
+    "url": "https://github.com/lcd11001/pixi-game/issues"
   },
+  "homepage": "https://github.com/lcd11001/pixi-game#readme",
   "dependencies": {
-    "lodash": "^4.17.5",
-    "pixi.js": "^4.7.0"
-  }
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-scripts": "2.1.1",
+    "@inlet/react-pixi": "^0.3.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

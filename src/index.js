@@ -1,38 +1,6 @@
-// https://webpack.js.org/guides/
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import _ from 'lodash';
-import './style.css';
-import Icon from './pixi_icon.png';
-import Data from './data.xml';
-import printMe from './print.js';
-import printPixiVersion from './pixi_game.js';
+import App from './App';
 
-function component() {
-  var element = document.createElement('div');
-
-  // Lodash, now imported by this script
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-  element.classList.add('hello');
-
-  // Add the image to our existing div
-  var myIcon = new Image();
-  myIcon.src = Icon;
-  myIcon.style.width = '50%';
-  myIcon.style.height = 'auto';
-
-  element.appendChild(myIcon);
-
-  var btn = document.createElement('button');
-  btn.innerHTML = 'Click me and check the console';
-  btn.addEventListener('click', function() {
-    printMe(Data);
-
-    printPixiVersion();
-  });
-
-  element.appendChild(btn);
-
-  return element;
-}
-
-document.body.appendChild(component());
+ReactDOM.render(<App />, document.getElementById('root'));

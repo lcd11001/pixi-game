@@ -1,17 +1,23 @@
 import React, { Component } from 'react'
-import { Sprite, withPixiApp } from "@inlet/react-pixi";
+import { Sprite, withPixiApp, Container } from "@inlet/react-pixi";
+
+import { Config } from './Config'
 
 
 class RotateBunny extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            rotation: -45
+            rotation: -45,
         }
     }
 
     componentDidMount() {
         this.props.app.ticker.add(this.update)
+
+        let width = this.props.app.container.GetWidth()
+        let height = this.props.app.container.GetHeight()
+        console.log('RotateBunny', width + 'x' + height)
     }
 
     componentWillUnmount() {
@@ -27,12 +33,12 @@ class RotateBunny extends Component {
     render() {
         const {
             app: {
-                _options: {
-                    width,
-                    height
+                container
                 }
-            }
         } = this.props
+
+        let width = container.GetWidth()
+        let height = container.GetHeight()
 
         const {
             rotation

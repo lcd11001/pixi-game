@@ -3,7 +3,22 @@ import PropTypes from 'prop-types'
 
 import { withPixiApp, Container } from '@inlet/react-pixi'
 
+import { Config } from './Config'
+
 class AppContainer extends Component {
+    constructor(props)
+    {
+        super(props)
+
+        this.state = {
+            rotation: 0
+        }
+
+        console.log('AppContainer::constructor', this.props)
+        this.props.app.container = this
+        console.log('AppContainer::constructor 2222 ', this.props)
+    }
+
     componentWillMount() {
         this._resize()
     }
@@ -17,52 +32,174 @@ class AppContainer extends Component {
     }
 
     _resize = () => {
-        this.scaleScene(this.props.app.renderer, this.props.app.stage)
+        let {
+            renderer
+        } = this.props.app
+
+        Config.isScreenPortrait = window.innerWidth < window.innerHeight;
+
+		if (!Config.isReverseScaleRatio)
+		{
+			if (Config.isGamePortrait)
+			{
+				if (Config.isScreenPortrait)
+				{
+					this.ratio = window.innerWidth / window.innerHeight;
+					renderer.resize(Config.height * this.ratio, Config.height);
+
+					this.offsetX = (renderer.width - Config.width) / 2;
+					this.offsetY = 0;
+				}
+				else
+				{
+					this.ratio = window.innerHeight / window.innerWidth;
+					renderer.resize(Config.height, Config.height * this.ratio);
+
+					this.offsetX = (renderer.height - Config.width) / 2;
+					this.offsetY = 0;
+				}
+			}
+			else
+			{
+				if (Config.isScreenPortrait)
+				{
+					this.ratio = window.innerWidth / window.innerHeight;
+					renderer.resize(Config.width * this.ratio, Config.width);
+
+					this.offsetX = 0;
+					this.offsetY = (renderer.width - Config.height) / 2;
+				}
+				else
+				{
+					this.ratio = window.innerHeight / window.innerWidth;
+					renderer.resize(Config.width, Config.width * this.ratio);
+
+					this.offsetX = 0;
+					this.offsetY = (renderer.height - Config.height) / 2;
+				}
+			}
+		}
+		else
+		{
+			if (Config.isGamePortrait)
+			{
+				if (Config.isScreenPortrait)
+				{
+					this.ratio = window.innerHeight / window.innerWidth;
+					renderer.resize(Config.width, Config.width * this.ratio);
+
+					this.offsetX = 0;
+					this.offsetY = (renderer.height - Config.height) / 2;
+				}
+				else
+				{
+					this.ratio = window.innerWidth / window.innerHeight;
+					renderer.resize(Config.width * this.ratio, Config.width);
+
+					this.offsetX = 0;
+					this.offsetY = (renderer.width - Config.height) / 2;
+				}
+			}
+			else
+			{
+				if (Config.isScreenPortrait)
+				{
+					this.ratio = window.innerHeight / window.innerWidth;
+					renderer.resize(Config.height, Config.height * this.ratio);
+
+					this.offsetX = (renderer.height - Config.width) / 2;
+					this.offsetY = 0;
+				}
+				else
+				{
+					this.ratio = window.innerWidth / window.innerHeight;
+					renderer.resize(Config.height * this.ratio, Config.height);
+
+					this.offsetX = (renderer.width - Config.width) / 2;
+					this.offsetY = 0;
+				}
+			}
+		}
+		
+		renderer.view.setAttribute("style", `width:${window.innerWidth}px; height:${window.innerHeight}px`);
+        this.Rotate(this.IsRotate());
     }
 
-    scaleScene = (renderer, sceneContainer) => {
-        if (!renderer || !sceneContainer) {
-            console.log('renderer', renderer, 'sceneContainer', sceneContainer)
-            return
-        }
-        const gameWidth = this.props.gameWidth;
-        const gameHeight = this.props.gameHeight;
-        const gameOrientation = gameWidth > gameHeight ? 'landscape' : 'portrait';
-        const gameLandscapeScreenRatio = gameWidth / gameHeight;
-        const gamePortraitScreenRatio = gameHeight / gameWidth;
+    GetWidth()
+	{
+        let {
+            renderer
+        } = this.props.app
 
-        const isScreenPortrait = window.innerHeight >= window.innerWidth;
-        const isScreenLandscape = !isScreenPortrait;
-        const screenRatio = window.innerWidth / window.innerHeight;
+		if (this.state.rotation === 0)
+		{
+			return renderer.width;
+		}
+		else
+		{
+			return renderer.height;
+		}
+	}
 
-        let newWidth;
-        let newHeight;
+	GetHeight()
+	{
+        let {
+            renderer
+        } = this.props.app
 
-        if ((gameOrientation === 'landscape' && isScreenLandscape) || (gameOrientation === 'portrait' && isScreenPortrait)) {
-            if (screenRatio < gameLandscapeScreenRatio) {
-                newWidth = gameWidth;
-                newHeight = Math.round(gameWidth / screenRatio);
-            } else {
-                newWidth = Math.round(gameHeight * screenRatio);
-                newHeight = gameHeight;
-            }
-        } else {
-            if (screenRatio < gamePortraitScreenRatio) {
-                newWidth = gameHeight;
-                newHeight = Math.round(gameHeight / screenRatio);
-            } else {
-                newWidth = Math.round(gameWidth * screenRatio);
-                newHeight = gameWidth;
-            }
-        }
-
-        renderer.resize(newWidth, newHeight);
-
-        sceneContainer.x = (newWidth - gameWidth) / 2;
-        sceneContainer.y = (newHeight - gameHeight) / 2;
+		if (this.state.rotation === 0)
+		{
+			return renderer.height;
+		}
+		else
+		{
+			return renderer.width;
+		}
     }
+    
+    Align(stage)
+	{
+        let {
+            renderer
+        } = this.props.app
+
+		stage.position.set(renderer.width / 2, renderer.height / 2);
+		stage.pivot.set(this.GetWidth() / 2, this.GetHeight() / 2);
+	}
+
+    Rotate(isRotate)
+	{
+        let {
+            stage,
+            renderer
+        } = this.props.app
+
+		if (isRotate)
+		{
+			stage.position.set(renderer.width / 2, renderer.height / 2);
+			stage.pivot.set(renderer.width / 2, renderer.height / 2);
+			stage.rotation = -90 * Math.PI / 180;
+		}
+		else
+		{
+			stage.pivot.set(0, 0);
+			stage.position.set(0, 0);
+			stage.rotation = 0;
+        }
+
+        this.setState({
+            rotation: stage.rotation
+        })
+    }
+
+    IsRotate()
+	{
+		return Config.isGamePortrait !== Config.isScreenPortrait;
+	}
 
     render() {
+        console.log('AppContainer', this.props)
+
         return (
             <Container>
                 {
@@ -74,8 +211,8 @@ class AppContainer extends Component {
 }
 
 AppContainer.propTypes = {
-    gameWidth: PropTypes.number.isRequired,
-    gameHeight: PropTypes.number.isRequired
+    canvasWidth: PropTypes.number.isRequired,
+    canvasHeight: PropTypes.number.isRequired
 }
 
 export default withPixiApp(AppContainer);

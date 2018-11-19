@@ -1,32 +1,39 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
 import { Stage } from '@inlet/react-pixi'
 
 import AppContainer from './AppContainer'
 import RotateBunny from './RotateBunny';
 
 class App extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            gameWidth: 800,
-            gameHeight: 600
-        }
+    componentDidMount() {
+        document.body.style.margin = 0
     }
+
     render() {
         const {
-            gameWidth, 
-            gameHeight
-        } = this.state
+            canvasWidth,
+            canvasHeight,
+            options = {}
+        } = this.props
+
+        console.log('App', this.props)
 
         return (
-            <Stage width={gameWidth} height={gameHeight} options={{ backgroundColor: 0xff00ff }}>
-                <AppContainer {...this.state}>
-                    <RotateBunny/>
+            <Stage width={canvasWidth} height={canvasHeight} options={options}>
+                <AppContainer {...this.props}>
+                    <RotateBunny />
                 </AppContainer>
             </Stage>
         )
     }
+}
+
+App.propsType = {
+    canvasWidth: PropTypes.number.isRequired,
+    canvasHeight: PropTypes.number.isRequired,
+    options: PropTypes.object
 }
 
 export default App;

@@ -1,14 +1,29 @@
 import React, { Component } from 'react'
-import { Stage, Sprite, Container } from '@inlet/react-pixi'
+import { Stage } from '@inlet/react-pixi'
+
+import AppContainer from './AppContainer'
 import RotateBunny from './RotateBunny';
 
 class App extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            gameWidth: 800,
+            gameHeight: 600
+        }
+    }
     render() {
+        const {
+            gameWidth, 
+            gameHeight
+        } = this.state
+
         return (
-            <Stage width={window.innerWidth} height={window.innerHeight} options={{ backgroundColor: 0xff00ff }}>
-                <Container>
+            <Stage width={gameWidth} height={gameHeight} options={{ backgroundColor: 0xff00ff }}>
+                <AppContainer {...this.state}>
                     <RotateBunny/>
-                </Container>
+                </AppContainer>
             </Stage>
         )
     }

@@ -1,7 +1,5 @@
 class GameConfig {
     constructor() {
-        console.log('Config::constructor')
-
         this.scale = 1
         this.isGamePortrait = true
         this.isScreenPortrait = window.innerWidth < window.innerHeight

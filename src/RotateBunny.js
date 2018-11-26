@@ -14,10 +14,6 @@ class RotateBunny extends Component {
 
     componentDidMount() {
         this.props.app.ticker.add(this.update)
-
-        let width = this.props.app.container.GetWidth()
-        let height = this.props.app.container.GetHeight()
-        console.log('RotateBunny', width + 'x' + height)
     }
 
     componentWillUnmount() {
@@ -33,19 +29,20 @@ class RotateBunny extends Component {
     render() {
         const {
             app: {
-                container
-                }
+                renderer
+            },
+            
         } = this.props
 
-        let width = container.GetWidth()
-        let height = container.GetHeight()
+        let width = renderer.width
+        let height = renderer.height
 
         const {
             rotation
         } = this.state
 
         return (
-            <Sprite image="./assets/images/bunny.png" x={width/2} y={height/2} scale={0.2} rotation={rotation} anchor={0.5}/>
+            <Sprite image="./assets/images/bunny.png" x={width / 2} y={height / 2} scale={0.2} rotation={rotation} anchor={0.5} />
         )
     }
 }

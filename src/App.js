@@ -9,6 +9,7 @@ import RotateBunny from './RotateBunny';
 class App extends Component {
     componentDidMount() {
         document.body.style.margin = 0
+        document.body.style.overflow = 'hidden'
     }
 
     render() {

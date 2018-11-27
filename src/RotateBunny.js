@@ -8,7 +8,7 @@ class RotateBunny extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            rotation: -45,
+            rotation: 0,
         }
     }
 
@@ -29,20 +29,27 @@ class RotateBunny extends Component {
     render() {
         const {
             app: {
-                renderer
+                renderer,
+                stage
             },
-            
+
         } = this.props
 
         let width = renderer.width
         let height = renderer.height
+
+        let bg = width > height
+            ? './assets/bg/1334x750.jpg'
+            : './assets/bg/750x1334.jpg'
 
         const {
             rotation
         } = this.state
 
         return (
-            <Sprite image="./assets/images/bunny.png" x={width / 2} y={height / 2} scale={0.2} rotation={rotation} anchor={0.5} />
+            <Sprite image={bg} x={width / 2} y={height / 2} scale={1} rotation={stage.rotation} anchor={0.5}>
+                <Sprite image="./assets/images/bunny.png" x={0} y={0} scale={0.2} rotation={rotation} anchor={0.5} />
+            </Sprite>
         )
     }
 }

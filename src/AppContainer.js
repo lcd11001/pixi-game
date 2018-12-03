@@ -31,19 +31,39 @@ class AppContainer extends Component {
 			renderer
 		} = this.props.app
 
-		Config.isScreenPortrait = window.innerWidth < window.innerHeight;
+		let {
+			renderer: {
+				view: {
+					ownerDocument,
+					parentNode
+				}
+			}
+		} = this.props.app
+
+		let rootNode = parentNode.parentNode
+		let parentWidth = window.innerWidth
+		let parentHeight = window.innerHeight
+
+		if (ownerDocument.body !== rootNode) {
+			parentWidth = rootNode.clientWidth
+			parentHeight = rootNode.clientHeight
+			console.log('parentNode', parentNode.id, 'rootNode', rootNode.id, parentWidth + 'x' + parentHeight)
+		}
+
+		Config.isScreenPortrait = parentWidth < parentHeight
+
 
 		if (!Config.isReverseScaleRatio) {
 			if (Config.isGamePortrait) {
 				if (Config.isScreenPortrait) {
-					this.ratio = window.innerWidth / window.innerHeight;
+					this.ratio = parentWidth / parentHeight
 					renderer.resize(Config.height * this.ratio, Config.height);
 
 					this.offsetX = (renderer.width - Config.width) / 2;
 					this.offsetY = 0;
 				}
 				else {
-					this.ratio = window.innerHeight / window.innerWidth;
+					this.ratio = parentHeight / parentWidth
 					renderer.resize(Config.height, Config.height * this.ratio);
 
 					this.offsetX = (renderer.height - Config.width) / 2;
@@ -52,14 +72,14 @@ class AppContainer extends Component {
 			}
 			else {
 				if (Config.isScreenPortrait) {
-					this.ratio = window.innerWidth / window.innerHeight;
+					this.ratio = parentWidth / parentHeight
 					renderer.resize(Config.width * this.ratio, Config.width);
 
 					this.offsetX = 0;
 					this.offsetY = (renderer.width - Config.height) / 2;
 				}
 				else {
-					this.ratio = window.innerHeight / window.innerWidth;
+					this.ratio = parentHeight / parentWidth
 					renderer.resize(Config.width, Config.width * this.ratio);
 
 					this.offsetX = 0;
@@ -70,14 +90,14 @@ class AppContainer extends Component {
 		else {
 			if (Config.isGamePortrait) {
 				if (Config.isScreenPortrait) {
-					this.ratio = window.innerHeight / window.innerWidth;
+					this.ratio = parentHeight / parentWidth
 					renderer.resize(Config.width, Config.width * this.ratio);
 
 					this.offsetX = 0;
 					this.offsetY = (renderer.height - Config.height) / 2;
 				}
 				else {
-					this.ratio = window.innerWidth / window.innerHeight;
+					this.ratio = parentWidth / parentHeight
 					renderer.resize(Config.width * this.ratio, Config.width);
 
 					this.offsetX = 0;
@@ -86,14 +106,14 @@ class AppContainer extends Component {
 			}
 			else {
 				if (Config.isScreenPortrait) {
-					this.ratio = window.innerHeight / window.innerWidth;
+					this.ratio = parentHeight / parentWidth
 					renderer.resize(Config.height, Config.height * this.ratio);
 
 					this.offsetX = (renderer.height - Config.width) / 2;
 					this.offsetY = 0;
 				}
 				else {
-					this.ratio = window.innerWidth / window.innerHeight;
+					this.ratio = parentWidth / parentHeight
 					renderer.resize(Config.height * this.ratio, Config.height);
 
 					this.offsetX = (renderer.width - Config.width) / 2;
@@ -102,10 +122,10 @@ class AppContainer extends Component {
 			}
 		}
 
-		renderer.view.setAttribute("style", `width:${window.innerWidth}px; height:${window.innerHeight}px`);
+		renderer.view.setAttribute("style", `width:${parentWidth}px; height:${parentHeight}px`);
 		this.Rotate(this.IsRotate());
 
-		console.log('AppContainer::_resize', window.innerWidth + 'x' + window.innerHeight, '	renderer => ', renderer.width + 'x' + renderer.height)
+		console.log('AppContainer::_resize', parentWidth + 'x' + parentHeight, '	renderer => ', renderer.width + 'x' + renderer.height)
 	}
 
 	GetWidth() {

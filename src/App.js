@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import { Stage } from '@inlet/react-pixi'
 
 import AppContainer from './AppContainer'
-import RotateBunny from './RotateBunny';
 
 class App extends Component {
     componentDidMount() {
@@ -24,7 +23,9 @@ class App extends Component {
         return (
             <Stage width={canvasWidth} height={canvasHeight} options={options}>
                 <AppContainer {...this.props}>
-                    <RotateBunny />
+                    {
+                        this.props.children
+                    }
                 </AppContainer>
             </Stage>
         )

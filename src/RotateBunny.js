@@ -42,12 +42,16 @@ class RotateBunny extends Component {
             ? './assets/bg/1334x750.jpg'
             : './assets/bg/750x1334.jpg'
 
+        let bgScale = width > height
+            ? Math.max(width / 1334, height / 750)
+            : Math.max(width / 750, height / 1334)
+
         const {
             rotation
         } = this.state
 
         return (
-            <Sprite image={bg} x={width / 2} y={height / 2} scale={1} rotation={stage.rotation} anchor={0.5}>
+            <Sprite image={bg} x={width / 2} y={height / 2} scale={bgScale} rotation={stage.rotation} anchor={0.5}>
                 <Sprite image="./assets/images/bunny.png" x={0} y={0} scale={0.2} rotation={rotation} anchor={0.5} />
             </Sprite>
         )

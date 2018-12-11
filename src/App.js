@@ -13,16 +13,14 @@ class App extends Component {
 
     render() {
         const {
-            canvasWidth,
-            canvasHeight,
             options = {}
         } = this.props
 
         console.log('App', this.props)
 
         return (
-            <Stage width={canvasWidth} height={canvasHeight} options={options}>
-                <AppContainer {...this.props}>
+            <Stage options={options}>
+                <AppContainer>
                     {
                         this.props.children
                     }
@@ -33,8 +31,6 @@ class App extends Component {
 }
 
 App.propsType = {
-    canvasWidth: PropTypes.number.isRequired,
-    canvasHeight: PropTypes.number.isRequired,
     options: PropTypes.object
 }
 

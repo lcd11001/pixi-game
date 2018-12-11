@@ -47,7 +47,7 @@ class AppContainer extends Component {
 		if (ownerDocument.body !== rootNode) {
 			parentWidth = rootNode.clientWidth
 			parentHeight = rootNode.clientHeight
-			console.log('parentNode', parentNode.id, 'rootNode', rootNode.id, parentWidth + 'x' + parentHeight)
+			// console.log('parentNode', parentNode.id, 'rootNode', rootNode.id, parentWidth + 'x' + parentHeight)
 		}
 
 		Config.isScreenPortrait = parentWidth < parentHeight
@@ -125,7 +125,7 @@ class AppContainer extends Component {
 		renderer.view.setAttribute("style", `width:${parentWidth}px; height:${parentHeight}px`);
 		this.Rotate(this.IsRotate());
 
-		console.log('AppContainer::_resize', parentWidth + 'x' + parentHeight, '	renderer => ', renderer.width + 'x' + renderer.height)
+		// console.log('AppContainer::_resize', parentWidth + 'x' + parentHeight, '	renderer => ', renderer.width + 'x' + renderer.height)
 	}
 
 	GetWidth() {
@@ -198,11 +198,6 @@ class AppContainer extends Component {
 			</Container>
 		)
 	}
-}
-
-AppContainer.propTypes = {
-	canvasWidth: PropTypes.number.isRequired,
-	canvasHeight: PropTypes.number.isRequired
 }
 
 export default withPixiApp(AppContainer);

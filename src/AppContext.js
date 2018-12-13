@@ -1,7 +1,10 @@
 import React from 'react'
 
 const AppContainerContext = React.createContext({
-    rotation: 0
+    rotation: 0,
+    width: 0,
+    height: 0,
+    portrait: true
 })
 
 const AppContainerProvider = AppContainerContext.Provider

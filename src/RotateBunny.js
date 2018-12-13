@@ -13,13 +13,13 @@ class RotateBunny extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     this.props.app.ticker.add(this.update)
-    // }
+    componentDidMount() {
+        this.props.app.ticker.add(this.update)
+    }
 
-    // componentWillUnmount() {
-    //     this.props.app.ticker.remove(this.update)
-    // }
+    componentWillUnmount() {
+        this.props.app.ticker.remove(this.update)
+    }
 
     update = (delta) => {
         this.setState((state, props) => ({
@@ -29,15 +29,13 @@ class RotateBunny extends Component {
 
     render() {
         const {
-            app: {
-                renderer,
-                stage
+            appContainer: {
+                width,
+                height,
+                rotation
             },
 
         } = this.props
-
-        let width = renderer.width
-        let height = renderer.height
 
         let bg = width > height
             ? './assets/bg/1334x750.jpg'
@@ -47,13 +45,11 @@ class RotateBunny extends Component {
             ? Math.max(width / 1334, height / 750)
             : Math.max(width / 750, height / 1334)
 
-        const {
-            rotation
-        } = this.state
+        let rotationRad = rotation * Math.PI / 180
 
         return (
-            <Sprite image={bg} x={width / 2} y={height / 2} scale={bgScale} rotation={stage.rotation} anchor={0.5}>
-                <Sprite image="./assets/images/bunny.png" x={0} y={0} scale={0.2} rotation={rotation} anchor={0.5} />
+            <Sprite image={bg} x={width / 2} y={height / 2} scale={bgScale} rotation={rotationRad} anchor={0.5}>
+                <Sprite image="./assets/images/bunny.png" x={0} y={0} scale={0.2} rotation={this.state.rotation} anchor={0.5} />
             </Sprite>
         )
     }

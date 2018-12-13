@@ -16,8 +16,6 @@ class App extends Component {
             options = {}
         } = this.props
 
-        console.log('App', this.props)
-
         return (
             <Stage options={options}>
                 <AppContainer>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Sprite, withPixiApp, Container } from "@inlet/react-pixi";
+import { withAppContext } from './AppContext'
 
 import { Config } from './Config'
 
@@ -12,13 +13,13 @@ class RotateBunny extends Component {
         }
     }
 
-    componentDidMount() {
-        this.props.app.ticker.add(this.update)
-    }
+    // componentDidMount() {
+    //     this.props.app.ticker.add(this.update)
+    // }
 
-    componentWillUnmount() {
-        this.props.app.ticker.remove(this.update)
-    }
+    // componentWillUnmount() {
+    //     this.props.app.ticker.remove(this.update)
+    // }
 
     update = (delta) => {
         this.setState((state, props) => ({
@@ -58,4 +59,4 @@ class RotateBunny extends Component {
     }
 }
 
-export default withPixiApp(RotateBunny)
+export default withPixiApp(withAppContext(RotateBunny))

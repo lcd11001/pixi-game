@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-
 import { withPixiApp, Container } from '@inlet/react-pixi'
+
+import { AppContainerProvider } from './AppContext'
 
 import { Config } from './Config'
 
 class AppContainer extends Component {
 	constructor(props) {
 		super(props)
-
 		this.state = {
 			rotation: 0
 		}
@@ -181,7 +180,7 @@ class AppContainer extends Component {
 		}
 
 		this.setState({
-			rotation: stage.rotation
+			rotation: stage.rotation === 0 ? 0 : -90
 		})
 	}
 
@@ -191,11 +190,11 @@ class AppContainer extends Component {
 
 	render() {
 		return (
-			<Container>
+			<AppContainerProvider value={this.state}>
 				{
 					this.props.children
 				}
-			</Container>
+			</AppContainerProvider>
 		)
 	}
 }

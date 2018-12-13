@@ -17,8 +17,9 @@
   },
   "homepage": "https://github.com/lcd11001/pixi-game#readme",
   "dependencies": {
-    "@inlet/react-pixi": "^0.4.0",
-    "pixi.js": "^4.8.2",
+    "@inlet/react-pixi": "^0.4.1",
+    "axios": "^0.18.0",
+    "pixi.js": "^4.8.3",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.1"

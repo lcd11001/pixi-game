@@ -8,12 +8,7 @@ import { Config } from './Config'
 class AppContainer extends Component {
 	constructor(props) {
 		super(props)
-		this.state = {
-			rotation: 0,
-			width: 0,
-			height: 0,
-			portrait: true
-		}
+		this.state = {}
 	}
 
 	componentWillMount() {
@@ -183,7 +178,8 @@ class AppContainer extends Component {
 		}
 
 		this.setState({
-			rotation: stage.rotation === 0 ? 0 : -90,
+			rotation: stage.rotation === 0 ? 0 : 90,
+			rotationRad: stage.rotation === 0 ? 0 : 90 * Math.PI / 180,
 			width: renderer.width,
 			height: renderer.height,
 			portrait: Config.isScreenPortrait

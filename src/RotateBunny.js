@@ -32,20 +32,19 @@ class RotateBunny extends Component {
             appContainer: {
                 width,
                 height,
-                rotation
+                rotationRad,
+                portrait
             },
 
         } = this.props
 
-        let bg = width > height
-            ? './assets/bg/1334x750.jpg'
-            : './assets/bg/750x1334.jpg'
+        let bg = portrait
+            ? './assets/bg/750x1334.jpg'
+            : './assets/bg/1334x750.jpg'
 
-        let bgScale = width > height
-            ? Math.max(width / 1334, height / 750)
-            : Math.max(width / 750, height / 1334)
-
-        let rotationRad = rotation * Math.PI / 180
+        let bgScale = portrait
+            ? Math.max(width / 750, height / 1334)
+            : Math.max(width / 1334, height / 750)
 
         return (
             <Sprite image={bg} x={width / 2} y={height / 2} scale={bgScale} rotation={rotationRad} anchor={0.5}>

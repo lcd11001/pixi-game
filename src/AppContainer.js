@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withPixiApp, Container } from '@inlet/react-pixi'
+import { withPixiApp } from '@inlet/react-pixi'
 
 import { AppContainerProvider } from './AppContext'
 
@@ -179,7 +179,7 @@ class AppContainer extends Component {
 
 		this.setState({
 			rotation: stage.rotation === 0 ? 0 : 90,
-			rotationRad: stage.rotation === 0 ? 0 : 90 * Math.PI / 180,
+			rotationRad: stage.rotation === 0 ? 0 : Math.PI / 2,
 			width: renderer.width,
 			height: renderer.height,
 			portrait: Config.isScreenPortrait

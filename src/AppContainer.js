@@ -7,11 +7,27 @@ import { AppContainerProvider } from './AppContext'
 class AppContainer extends Component {
 	constructor(props) {
 		super(props)
-		this.state = {}
+		this.state = {
+			width: 0,
+			height: 0
+		}
 	}
 
 	componentWillMount() {
 		this._resize()
+	}
+
+	componentWillReceiveProps(nextProps) {
+		const {
+			Config: {
+				width,
+				height
+			}
+		} = nextProps
+
+		if (width !== this.state.width || height !== this.state.height) {
+			this._resize()
+		}
 	}
 
 	componentDidMount() {

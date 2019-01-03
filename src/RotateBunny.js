@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import { Sprite, withPixiApp, Container } from "@inlet/react-pixi";
 import { withAppContext } from './AppContext'
 
-import { Config } from './Config'
-
-
 class RotateBunny extends Component {
     constructor(props) {
         super(props)

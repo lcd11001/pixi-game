@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { withPixiApp } from '@inlet/react-pixi'
 
 import { AppContainerProvider } from './AppContext'
-
-import { Config } from './Config'
 
 class AppContainer extends Component {
 	constructor(props) {
@@ -24,11 +23,15 @@ class AppContainer extends Component {
 	}
 
 	_resize = () => {
-		let {
+		const {
+			Config
+		} = this.props
+
+		const {
 			renderer
 		} = this.props.app
 
-		let {
+		const {
 			renderer: {
 				view: {
 					ownerDocument,
@@ -44,12 +47,10 @@ class AppContainer extends Component {
 		if (ownerDocument.body !== rootNode) {
 			parentWidth = rootNode.clientWidth
 			parentHeight = rootNode.clientHeight
-			// console.log('parentNode', parentNode.id, 'rootNode', rootNode.id, parentWidth + 'x' + parentHeight)
 		}
 
 		Config.isScreenPortrait = parentWidth < parentHeight
-
-
+		
 		if (!Config.isReverseScaleRatio) {
 			if (Config.isGamePortrait) {
 				if (Config.isScreenPortrait) {
@@ -126,7 +127,7 @@ class AppContainer extends Component {
 	}
 
 	GetWidth() {
-		let {
+		const {
 			renderer
 		} = this.props.app
 
@@ -139,7 +140,7 @@ class AppContainer extends Component {
 	}
 
 	GetHeight() {
-		let {
+		const {
 			renderer
 		} = this.props.app
 
@@ -152,7 +153,7 @@ class AppContainer extends Component {
 	}
 
 	Align(stage) {
-		let {
+		const {
 			renderer
 		} = this.props.app
 
@@ -161,7 +162,11 @@ class AppContainer extends Component {
 	}
 
 	Rotate(isRotate) {
-		let {
+		const {
+			Config
+		} = this.props
+
+		const {
 			stage,
 			renderer
 		} = this.props.app
@@ -187,6 +192,10 @@ class AppContainer extends Component {
 	}
 
 	IsRotate() {
+		const {
+			Config
+		} = this.props
+
 		return Config.isGamePortrait !== Config.isScreenPortrait;
 	}
 
@@ -199,6 +208,10 @@ class AppContainer extends Component {
 			</AppContainerProvider>
 		)
 	}
+}
+
+AppContainer.propsType = {
+	Config: PropTypes.object.isRequired
 }
 
 export default withPixiApp(AppContainer);

@@ -1,25 +1,31 @@
-class GameConfig {
-    constructor() {
+class Config {
+    constructor(defaultWidth, defaultHeight) {
         this.scale = 1
-        this.isGamePortrait = true
+        this.isGamePortrait = false
         this.isScreenPortrait = window.innerWidth < window.innerHeight
-        this.isSupportTwoScreenSize = true
+        this.isSupportTwoScreenSize = false
         this.isReverseScaleRatio = false
         this.isUseDetectRenderer = false
-        this.isBackgroundTransparent = false
+        this.isBackgroundTransparent = true
 
-        this.CalculateScreenSize()
+        this.CalculateScreenSize(defaultWidth, defaultHeight)
     }
 
-    CalculateScreenSize() {
+    CalculateScreenSize(defaultWidth, defaultHeight) {
         if (this.isGamePortrait) {
-            this.width = 750
-            this.height = 1334
+            this.width = defaultWidth
+            this.height = defaultHeight
         } else {
-            this.width = 1334
-            this.height = 750
+            this.width = defaultHeight
+            this.height = defaultWidth
+        }
+    }
+
+    GetOptions() {
+        return {
+            transparent: this.isBackgroundTransparent
         }
     }
 }
 
-export const Config = new GameConfig()
+export default Config

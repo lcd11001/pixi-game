@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Config } from './Config'
 import App from './App';
 
 import { Container } from '@inlet/react-pixi';
@@ -18,10 +17,8 @@ const RenderChildren = () => (
 
 const RenderApp = () => (
     <App
-        canvasWidth={Config.width}
-        canvasHeight={Config.height}
         options={{
-            // transparent: Config.isBackgroundTransparent
+            // transparent: true
             backgroundColor: 0xff00ff
         }}
     >
